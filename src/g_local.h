@@ -1518,6 +1518,21 @@ typedef struct
 #include "combat/abilities/g_abilities.h"
 #include "menus/menu.h"
 
+/* az: variable refresh rate stuff */
+struct vrr_t
+{
+	/* weapon */
+	float gun_wait_time; // kind of a filthy hack to stop mg/cg from going crazy
+	float gun_time; // weapon animations time
+	int stretched_frames; // for sword
+
+	// we need to skip a frames sometimes, since a ucmd_t triggered it but a longer wait period than 1 server frame is expected
+	float gun_think_debounce_time;
+
+	/* player animation */
+	float anim_time; // player model animations time
+};
+
 // this structure is cleared on each PutClientInServer(),
 // except for 'client->pers'
 struct gclient_s
@@ -1687,6 +1702,8 @@ struct gclient_s
 	vec3_t		lastPosition;		// last selected position for monster command
 	edict_t		*lastEnt;			// last selected entity for monster command
     qboolean update_chase;
+
+	struct vrr_t vrr; // variable refresh rate data
 };
 
 struct edict_s

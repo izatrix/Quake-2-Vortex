@@ -4,6 +4,7 @@
 #include "../combat/abilities/jump.h"
 #include "../combat/abilities/v_think.h"
 #include "../gamemodes/boss.h"
+#include "characters/class_limits.h"
 
 //Function prototypes required for this .c file:
 void ClientUserinfoChanged (edict_t *ent, char *userinfo);
@@ -2960,11 +2961,12 @@ void ClientBeginServerFrame (edict_t *ent)
 
 	// run weapon animations if it hasn't been done by a ucmd_t
 	if (!client->weapon_thunk
-//ZOID
+		//ZOID
 		&& ent->movetype != MOVETYPE_NOCLIP
-//ZOID
-		)
-		Think_Weapon (ent);
+		//ZOID
+		) {
+		Think_Weapon(ent);
+	}
 	else
 		client->weapon_thunk = false;
 
