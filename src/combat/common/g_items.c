@@ -27,6 +27,19 @@ int regeneration_index;
 int haste_index;
 int body_armor_index;
 int power_cube_index;
+//izx start
+//like power cubes but for health
+int blood_energy_index;
+//componets
+/*
+int rune_mats_index;
+//ammo componets
+int energy_mats_index;
+int balistic_mats_index;
+int armor_mats_index;
+int tech_mats_index;
+*/
+//izx end
 int flag_index;
 int red_flag_index;
 int blue_flag_index;
@@ -527,12 +540,26 @@ qboolean Pickup_Health(edict_t *ent, edict_t *other) {
     float temp = 1.0;
 
     //3.0 cursed players can't pick up health
-    if (que_findtype(other->curses, NULL, CURSE) != NULL)
-        return false;
+    //IZX still pick up blood energy if client is cursed
+    if (que_findtype(other->curses, NULL, CURSE) != NULL) {
+    	//IZX Start
+    	count = ent->count;
+    	if (count == 2)
+    		other->client->pers.inventory[blood_energy_index] += 1;
+    	//IZX End
+		return false;
+    }
+
 
     if (!(ent->style & HEALTH_IGNORE_MAX)) {
-        if (other && other->health >= other->max_health)
-            return false;
+        if (other && other->health >= other->max_health) {
+        	//IZX still pick up blood energy if client is over max hp
+        	//IZX Start
+            count = ent->count;
+            other->client->pers.inventory[blood_energy_index] += 1;
+            //IZX END
+        	return false;
+        }
     }
 
     // special rules disable flag carrier abilities
@@ -546,6 +573,11 @@ qboolean Pickup_Health(edict_t *ent, edict_t *other) {
     }
 
     count = ent->count;
+    //IZX Start
+    if (ent->count == 2)
+    	other->client->pers.inventory[blood_energy_index] += 1;
+    //IZX End
+
     //K03 Begin
     if (other->health < other->max_health * 2)
         other->health += count * temp;
@@ -581,6 +613,7 @@ qboolean Pickup_Health(edict_t *ent, edict_t *other) {
                 SetRespawn(ent, 20);
         }
     }
+
 
     return true;
 }
@@ -2814,6 +2847,7 @@ void SP_item_health_small(edict_t *self) {
 
     self->model = "models/items/healing/stimpack/tris.md2";
     self->count = 2;
+    //self-> += 10;
     SpawnItem(self, FindItem("Health"));
     self->style = HEALTH_IGNORE_MAX;
     gi.soundindex("items/s_health.wav");

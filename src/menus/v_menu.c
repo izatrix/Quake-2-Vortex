@@ -741,3 +741,150 @@ void OpenWhoisMenu (edict_t *ent)
 		ent->client->menustorage.currentline = 16;
 	showmenu(ent);
 }
+
+void onlyclosemenu_handler (edict_t *ent, int option)
+{
+	closemenu(ent);
+}
+
+void OpenLoadoutMenu (edict_t *ent)
+{
+	if (!ShowMenu(ent))
+		return;
+	clearmenu(ent);
+
+	addlinetomenu(ent, "Loadout", MENU_GREEN_CENTERED);
+	addlinetomenu(ent, "", 0);
+	addlinetomenu(ent, " ", 0);
+	addlinetomenu(ent, "Exit", 1);
+
+	setmenuhandler(ent, onlyclosemenu_handler);
+	ent->client->menustorage.currentline = 4;
+	showmenu(ent);
+}
+
+void OpenComponentsMenu (edict_t *ent)
+{
+	if (!ShowMenu(ent))
+		return;
+	clearmenu(ent);
+
+	addlinetomenu(ent, "Components", MENU_GREEN_CENTERED);
+	addlinetomenu(ent, "", 0);
+	addlinetomenu(ent, va("Credits:        %d", ent->myskills.credits), 0);
+	addlinetomenu(ent, va("Power Cubes:    %d", ent->client->pers.inventory[power_cube_index]),0);
+	addlinetomenu(ent, va("Blood Energy:   %d", ent->client->pers.inventory[blood_energy_index]), 0);
+	//addlinetomenu(ent, va("Rune Mats:      %d", ent->client->pers.inventory[rune_mats_index]), 0);
+	//addlinetomenu(ent, va("Energy Mats:    %d", ent->client->pers.inventory[energy_mats_index]), 0);
+	//addlinetomenu(ent, va("Ballistic Mats: %d", ent->client->pers.inventory[balistic_mats_index]), 0);
+	//addlinetomenu(ent, va("Armor Mats:     %d", ent->client->pers.inventory[armor_mats_index]), 0);
+	//addlinetomenu(ent, va("Tech Mats:      %d", ent->client->pers.inventory[tech_mats_index]), 0);
+	addlinetomenu(ent, " ", 0);
+	addlinetomenu(ent, "Exit", 1);
+
+	setmenuhandler(ent, onlyclosemenu_handler);
+	ent->client->menustorage.currentline = 7;
+	//ent->client->menustorage.currentline = 12;
+		showmenu(ent);
+}
+
+void OpenDisassembleMenu (edict_t *ent)
+{
+	if (!ShowMenu(ent))
+		return;
+	clearmenu(ent);
+
+	addlinetomenu(ent, "Disassemble", MENU_GREEN_CENTERED);
+	addlinetomenu(ent, "", 0);
+	addlinetomenu(ent, " ", 0);
+	addlinetomenu(ent, "Exit", 1);
+
+	setmenuhandler(ent, onlyclosemenu_handler);
+	ent->client->menustorage.currentline = 4;
+	showmenu(ent);
+}
+
+void OpenTechTierMenu (edict_t *ent)
+{
+	if (!ShowMenu(ent))
+		return;
+	clearmenu(ent);
+
+	addlinetomenu(ent, "Tech-Tier", MENU_GREEN_CENTERED);
+	addlinetomenu(ent, "", 0);
+	addlinetomenu(ent, " ", 0);
+	addlinetomenu(ent, "Exit", 1);
+
+	setmenuhandler(ent, onlyclosemenu_handler);
+	ent->client->menustorage.currentline = 4;
+	showmenu(ent);
+}
+
+void OpenWeaponTierMenu (edict_t *ent)
+{
+	if (!ShowMenu(ent))
+		return;
+	clearmenu(ent);
+
+	addlinetomenu(ent, "Weapon-Tier", MENU_GREEN_CENTERED);
+	addlinetomenu(ent, "", 0);
+	addlinetomenu(ent, " ", 0);
+	addlinetomenu(ent, "Exit", 1);
+
+	setmenuhandler(ent, onlyclosemenu_handler);
+	ent->client->menustorage.currentline = 4;
+	showmenu(ent);
+}
+
+void OpenEquiptmentTierMenu (edict_t *ent)
+{
+	if (!ShowMenu(ent))
+		return;
+	clearmenu(ent);
+
+	addlinetomenu(ent, "Equipment-Tier", MENU_GREEN_CENTERED);
+	addlinetomenu(ent, "", 0);
+	addlinetomenu(ent, " ", 0);
+	addlinetomenu(ent, "Exit", 1);
+
+	setmenuhandler(ent, onlyclosemenu_handler);
+	ent->client->menustorage.currentline = 4;
+	showmenu(ent);
+}
+
+void izxmenu_handler (edict_t *ent, int option)
+{
+	switch (option)
+	{
+		case 1: OpenLoadoutMenu(ent); break;
+		case 2: OpenComponentsMenu(ent); break;
+		case 3: OpenDisassembleMenu(ent); break;
+		case 4: OpenTechTierMenu(ent); break;
+		case 5: OpenWeaponTierMenu(ent); break;
+		case 6: OpenEquiptmentTierMenu(ent); break;
+		default: closemenu(ent);
+	}
+}
+
+void Cmd_ShowIzxMenu (edict_t *ent, int option)
+{
+	if (!ShowMenu(ent))
+	        return;
+		clearmenu(ent);
+			//				xxxxxxxxxxxxxxxxxxxxxxxxxxx (max length 27 chars)
+		addlinetomenu(ent, "IZX-Menu", MENU_GREEN_CENTERED);
+		addlinetomenu(ent, "Please choose a sub-menu.", MENU_GREEN_CENTERED);
+		addlinetomenu(ent, "", 0);
+		addlinetomenu(ent, "Load-out", 1);
+		addlinetomenu(ent, "Components", 2);
+		addlinetomenu(ent, "Disassemble", 3);
+		addlinetomenu(ent, "Tech-Upgrades", 4);
+		addlinetomenu(ent, "Weapon-Upgrades", 5);
+		addlinetomenu(ent, "Equiptment-Upgrades", 6);
+		addlinetomenu(ent, " ", 0);
+		addlinetomenu(ent, "Exit", 7);
+
+		setmenuhandler(ent, izxmenu_handler);
+		ent->client->menustorage.currentline = 4;
+		showmenu(ent);
+}
