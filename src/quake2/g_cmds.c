@@ -3351,7 +3351,7 @@ void ClientCommand (edict_t *ent)
 		{
 			ent->manashield = !ent->manashield;
 
-			//TODO: add a mana shield graphical effect?
+			//s
 
 			if(ent->manashield) safe_cprintf(ent, PRINT_HIGH, "Manashield enabled.\n");
 			else				safe_cprintf(ent, PRINT_HIGH, "Manashield disabled.\n");
@@ -3420,8 +3420,12 @@ void ClientCommand (edict_t *ent)
 		Cmd_IceBolt_f (ent, 1.0, 1.0);
 	else if (Q_stricmp (cmd, "lightningstorm") == 0)
 		Cmd_LightningStorm_f (ent, 1.0, 1.0);
-	//K03 End
+	//IZX Start
+	else if (Q_stricmp (cmd, "izxmenu") == 0)
+		Cmd_ShowIzxMenu(ent, 0);
+	//IZX End
 	else safe_cprintf(ent, PRINT_HIGH, "Unknown client command: %s\n", cmd);
+	//K03 End
 	/*
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);

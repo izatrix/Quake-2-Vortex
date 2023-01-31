@@ -663,7 +663,22 @@ extern int	snd_fry;
 extern int	jacket_armor_index; 
 extern int	combat_armor_index; 
 extern int	body_armor_index;  
-extern int	power_cube_index;  
+extern int	power_cube_index;
+
+//IZX
+//Like power cubes but for health
+extern int  blood_energy_index;
+//equipment components
+/*
+extern int armor_mats_index;
+extern int tech_mats_index;
+extern int rune_mats_index;
+//ammo components
+extern int energy_mats_index;
+extern int balistic_mats_index;
+*/
+//end IZX
+
 extern int	flag_index;  
 extern int	red_flag_index;
 extern int	blue_flag_index;
@@ -1475,6 +1490,9 @@ typedef struct
 	gitem_t		*weapon;
 	gitem_t		*lastweapon;
 
+	//IZX Begin
+	int			blood_energy;	//used for tracking blood energy (like power cubes but for hp)
+	//IZX End
 	int			power_cubes;	// used for tracking the cubes in coop games
 	int			score;			// for calculating total unit score in coop games
 

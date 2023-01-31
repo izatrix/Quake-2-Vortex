@@ -1,0 +1,3 @@
+In this folder type:
+cmake .
+cmake --build .

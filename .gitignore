@@ -18,3 +18,11 @@ util/v_luasettings_game.h
 CmakeSettings.txt
 /CMakeSettings.json
 /CppProperties.json
+.cproject
+.project
+gamex86_64.so
+.git
+Makefile
+CMakeCache.txt
+CMakeFiles/*
+cmake_install.cmake
