@@ -23,3 +23,6 @@ CmakeSettings.txt
 gamex86_64.so
 .git
 Makefile
+CMakeCache.txt
+CMakeFiles/*
+cmake_install.cmake
